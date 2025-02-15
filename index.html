@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Scientific Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #c7d2fe;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .calculator {
+            width: 100%;
+            max-width: 400px;
+            border: 2px solid #1e293b;
+            border-radius: 15px;
+            padding: 20px;
+            background-color: #f1f5f9;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            height: 70px;
+            font-size: 28px;
+            text-align: right;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background-color: #fff;
+            color: #000;
+            pointer-events: none;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            padding: 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: #f3f4f6;
+            color: #000;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #d1d5db;
+        }
+
+        button:active {
+            background-color: #6b7280;
+            color: #fff;
+        }
+
+        .special {
+            background-color: #a7f3d0;
+        }
+
+        .special:hover {
+            background-color: #34d399;
+        }
+
+        .equals {
+            background-color: #fca5a5;
+            grid-column: span 2;
+        }
+
+        .equals:hover {
+            background-color: #ef4444;
+        }
+
+        @media (max-width: 500px) {
+            input[type="text"] {
+                font-size: 22px;
+                height: 60px;
+            }
+
+            button {
+                font-size: 18px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <button class="special" onclick="clearDisplay()">C</button>
+            <button class="special" onclick="deleteLast()">DEL</button>
+            <button class="special" onclick="appendToDisplay('(')">(</button>
+            <button class="special" onclick="appendToDisplay(')')">)</button>
+
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('/')">/</button>
+
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('*')">*</button>
+
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('-')">-</button>
+
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="appendToDisplay('+')">+</button>
+            <button class="equals" onclick="calculateResult()">=</button>
+
+            <button class="special" onclick="calculateSqrt()">√</button>
+            <button class="special" onclick="calculatePower()">x^y</button>
+            <button class="special" onclick="calculateSin()">sin</button>
+            <button class="special" onclick="calculateCos()">cos</button>
+            <button class="special" onclick="calculateTan()">tan</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+
+        function appendToDisplay(value) {
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function deleteLast() {
+            display.value = display.value.slice(0, -1);
+        }
+
+        function calculateResult() {
+            try {
+                display.value = eval(display.value);
+            } catch {
+                display.value = 'Error';
+            }
+        }
+
+        function calculateSqrt() {
+            if (display.value !== '') {
+                display.value = Math.sqrt(eval(display.value)).toFixed(4);
+            }
+        }
+
+        function calculatePower() {
+            let base = parseFloat(prompt('Enter base:'));
+            let exponent = parseFloat(prompt('Enter exponent:'));
+            if (!isNaN(base) && !isNaN(exponent)) {
+                display.value = Math.pow(base, exponent);
+            } else {
+                display.value = 'Error';
+            }
+        }
+
+        function calculateSin() {
+            if (display.value !== '') {
+                display.value = Math.sin((parseFloat(display.value) * Math.PI) / 180).toFixed(4);
+            }
+        }
+
+        function calculateCos() {
+            if (display.value !== '') {
+                display.value = Math.cos((parseFloat(display.value) * Math.PI) / 180).toFixed(4);
+            }
+        }
+
+        function calculateTan() {
+            if (display.value !== '') {
+                display.value = Math.tan((parseFloat(display.value) * Math.PI) / 180).toFixed(4);
+            }
+        }
+    </script>
+</body>
+</html>
