@@ -30,7 +30,7 @@ A modern, responsive scientific calculator built using **HTML**, **CSS**, and **
 
 ## 🌎 Live Demo
 
-Check out the live version of this project: [Live Demo](#) *()*
+Check out the live version of this project: [Live Demo] (https://manikanta2804.github.io/Responsive_Calculator/)
 ![Image](https://github.com/user-attachments/assets/524723a6-2f7e-4b2f-b964-493d719353c5)
 
 ## 📱 Responsive Design
